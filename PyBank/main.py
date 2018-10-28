@@ -33,7 +33,7 @@ for row in range(Length):
 	Total += Profit
 	
 	#Change in profit as variable and collected into list for average
-	if row >0:
+	if row >0 and row < Length:
 		profitChange = Profit - prevProfit
 	else: profitChange = 0
 	
@@ -47,11 +47,11 @@ for row in range(Length):
 
 #sum of profit change for average, exclude first value
 	totalChange += profitChange
+	
+#average change exclude first month because it has no value
+avgChange = round(totalChange / (Length-1),2)
 
-avgChange = totalChange / Length
-
-
-#greates increase in pofites
+#print results in terminal
 
 print("Number of Months: "+str(Length))
 print("Total Profit/Loss: $"+str(Total))
@@ -59,6 +59,7 @@ print("Average Change $"+str(avgChange))
 print("Maximum Profit is: "+str(maxChange))
 print("Maximum Loss is: "+str(minChange))
 
+#write to csv
 with open('./output.csv','w') as csvfile:
 	csvwriter = csv.writer(csvfile, delimiter=",")
 	csvwriter.writerow(["Number of Months"]+[Length])
